@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "komorebi-cafe",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "3000", "komorebi/project/export"],
+      "port": 3000
+    }
+  ]
+}

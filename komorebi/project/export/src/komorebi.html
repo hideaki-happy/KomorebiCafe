@@ -1,0 +1,774 @@
+<!DOCTYPE html><html lang="ja"><head>
+
+
+<meta charset="UTF-8">
+<title>森のカフェ こもれび</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#1a2617"/>
+  <g transform="translate(100 108)" font-family="serif" fill="#f5f1e8" text-anchor="middle">
+    <text y="-10" font-size="22" font-style="italic" opacity="0.85">Komorebi</text>
+    <text y="22" font-size="16" letter-spacing="4">こもれび</text>
+  </g>
+</svg>
+</template>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&amp;family=Noto+Sans+JP:wght@400&amp;family=Cormorant+Garamond:ital,wght@1,400&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2418;
+    --ink-soft: #3a4033;
+    --paper: #f5f1e8;
+    --paper-warm: #ebe4d2;
+    --forest: #2b3a26;
+    --forest-deep: #1a2617;
+    --moss: #6b7a4f;
+    --bark: #6b5842;
+    --rule: rgba(31, 36, 24, 0.18);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.8;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+  }
+  img { display: block; max-width: 100%; }
+  .mincho { font-family: 'Shippori Mincho', serif; }
+  .latin { font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
+  /* ---------- Navigation ---------- */
+  nav.topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 48px;
+    background: rgba(245, 241, 232, 0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  nav .brand {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: 0.2em;
+  }
+  nav .brand small {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--moss);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 38px;
+  }
+  nav ul a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  nav ul a:hover { border-bottom-color: var(--forest); color: var(--forest); }
+  nav ul a .en {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--moss);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 680px;
+    overflow: hidden;
+  }
+  .hero .bg {
+    position: absolute;
+    inset: 0;
+    background: url('images/top.jpg') center/cover no-repeat;
+  }
+  .hero .bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(26, 38, 23, 0.15) 0%, rgba(26, 38, 23, 0.35) 60%, rgba(26, 38, 23, 0.55) 100%);
+  }
+  .hero .content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 60px 90px;
+    color: var(--paper);
+  }
+  .hero .eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    letter-spacing: 0.4em;
+    font-size: 14px;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+  .hero h1 {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 1.25;
+    letter-spacing: 0.08em;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.25);
+  }
+  .hero h1 .accent {
+    display: block;
+    font-size: 0.55em;
+    letter-spacing: 0.35em;
+    opacity: 0.95;
+    font-weight: 400;
+    margin-top: 8px;
+  }
+  .hero .tagline {
+    max-width: 520px;
+    font-size: 15px;
+    line-height: 2;
+    opacity: 0.92;
+    font-weight: 300;
+  }
+  .hero .side-label {
+    position: absolute;
+    right: 48px;
+    bottom: 90px;
+    z-index: 2;
+    writing-mode: vertical-rl;
+    color: var(--paper);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    letter-spacing: 0.5em;
+    font-size: 12px;
+    opacity: 0.8;
+  }
+  .hero .scroll-ind {
+    position: absolute;
+    left: 60px;
+    bottom: 38px;
+    z-index: 2;
+    color: var(--paper);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero .scroll-ind::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: var(--paper);
+    animation: scrollLine 2.2s ease-in-out infinite;
+    transform-origin: left center;
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleX(0.3); opacity: 0.4; }
+    50% { transform: scaleX(1); opacity: 1; }
+  }
+
+  /* ---------- Section framework ---------- */
+  section { padding: 140px 60px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 72px;
+  }
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--moss);
+    letter-spacing: 0.3em;
+    min-width: 48px;
+  }
+  .section-kicker {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--moss);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: 42px;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+    margin-top: 6px;
+  }
+  .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    margin-left: auto;
+    align-self: center;
+    max-width: 380px;
+  }
+
+  /* ---------- Concept ---------- */
+  .concept {
+    background: var(--paper);
+  }
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .concept-img {
+    position: relative;
+  }
+  .concept-img img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    filter: saturate(0.92);
+  }
+  .concept-img .cap {
+    position: absolute;
+    left: -14px;
+    top: 28px;
+    writing-mode: vertical-rl;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: var(--ink-soft);
+    background: var(--paper);
+    padding: 10px 4px;
+  }
+  .concept-text h3 {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.8;
+    letter-spacing: 0.12em;
+    margin-bottom: 36px;
+    color: var(--forest-deep);
+  }
+  .concept-text h3 .soft { color: var(--moss); }
+  .concept-text p {
+    font-size: 15px;
+    line-height: 2.15;
+    margin-bottom: 22px;
+    color: rgba(31, 36, 24, 0.58);
+    max-width: 520px;
+  }
+  .concept-text .sign {
+    margin-top: 42px;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--moss);
+  }
+
+  /* ---------- Menu ---------- */
+  .menu {
+    background: var(--forest-deep);
+    color: var(--paper);
+  }
+  .menu .section-num,
+  .menu .section-kicker { color: #a8b394; }
+  .menu .section-title { color: var(--paper); }
+  .menu .rule { background: rgba(245, 241, 232, 0.2); }
+
+  .menu-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .menu-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px 100px;
+  }
+  .menu-col h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.35em;
+    color: #c7cfb5;
+    padding-bottom: 18px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(245, 241, 232, 0.25);
+  }
+  .menu-col h4 .jp {
+    font-family: 'Shippori Mincho', serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    margin-left: 14px;
+    color: rgba(245, 241, 232, 0.55);
+  }
+  .menu-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px dashed rgba(245, 241, 232, 0.15);
+  }
+  .menu-item:last-child { border-bottom: none; }
+  .menu-item .name {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+  }
+  .menu-item .desc {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: rgba(245, 241, 232, 0.55);
+    margin-top: 6px;
+    font-weight: 400;
+  }
+  .menu-item .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: #e4dcc4;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .menu-item .price .yen {
+    font-size: 13px;
+    margin-right: 2px;
+    color: rgba(245, 241, 232, 0.65);
+  }
+  .menu-note {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(245, 241, 232, 0.15);
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: rgba(245, 241, 232, 0.55);
+    font-family: 'Shippori Mincho', serif;
+  }
+
+  /* ---------- Info ---------- */
+  .info {
+    background: var(--paper-warm);
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .info-left img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    margin-bottom: 28px;
+  }
+  .info-left .exterior-cap {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--moss);
+    padding-top: 4px;
+    border-top: 1px solid var(--rule);
+    padding-top: 14px;
+  }
+  .info-right .map-wrap {
+    position: relative;
+    background: #f5f1e8;
+    padding: 20px;
+    border: 1px solid var(--rule);
+  }
+  .info-right .map-wrap img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+  .info-right .map-label {
+    position: absolute;
+    top: 20px; left: 20px;
+    background: var(--paper);
+    padding: 8px 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+  }
+
+  .info-details {
+    margin-top: 40px;
+  }
+  .info-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .info-row:first-child { border-top: 1px solid var(--rule); }
+  .info-row .label {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    color: var(--moss);
+    font-weight: 500;
+    padding-top: 3px;
+  }
+  .info-row .label .en {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: rgba(107, 122, 79, 0.6);
+    margin-top: 4px;
+    font-weight: 400;
+  }
+  .info-row .value {
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.9;
+  }
+  .info-row .value strong {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: 0.08em;
+  }
+  .info-row .value small {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    letter-spacing: 0.12em;
+  }
+  .hours-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 28px;
+  }
+  .hours-grid .d {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--moss);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--forest-deep);
+    color: rgba(245, 241, 232, 0.75);
+    padding: 70px 60px 38px;
+    text-align: center;
+  }
+  footer .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 20px;
+    letter-spacing: 0.3em;
+    color: var(--paper);
+    margin-bottom: 10px;
+  }
+  footer .mark-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: #a8b394;
+    margin-bottom: 40px;
+  }
+  footer .divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(245, 241, 232, 0.3);
+    margin: 28px auto;
+  }
+  footer small {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: rgba(245, 241, 232, 0.5);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    nav.topbar { padding: 16px 20px; }
+    nav ul { gap: 18px; }
+    nav ul a { font-size: 11px; letter-spacing: 0.12em; }
+    nav ul a .en { display: none; }
+    section { padding: 90px 24px; }
+    .hero .content { padding: 0 24px 60px; }
+    .hero .side-label { display: none; }
+    .hero .scroll-ind { left: 24px; }
+    .section-title { font-size: 28px; }
+    .section-head { flex-wrap: wrap; gap: 14px; margin-bottom: 48px; }
+    .rule { display: none; }
+    .concept-grid, .menu-columns, .info-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .concept-text h3 { font-size: 22px; }
+    .info-row { grid-template-columns: 110px 1fr; gap: 14px; }
+  }
+</style>
+</head>
+<body data-cc-id="cc-1" style="cursor: crosshair; background-color: rgb(250, 237, 205);">
+
+<!-- ===== NAV ===== -->
+<nav class="topbar">
+  <div class="brand">
+    森のカフェ こもれび
+    <small>KOMOREBI — cafe in the woods</small>
+  </div>
+  <ul>
+    <li><a href="#concept">コンセプト<span class="en">concept</span></a></li>
+    <li><a href="#menu">メニュー<span class="en">menu</span></a></li>
+    <li><a href="#info">店舗情報<span class="en">access</span></a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="bg"></div>
+  <div class="side-label">a quiet hour in the forest</div>
+  <div class="content">
+    <div class="eyebrow">Est. in the woods</div>
+    <h1>
+      木漏れ日の<br>
+      静けさの中で。
+      <span class="accent latin">— Komorebi Café —</span>
+    </h1>
+    <p class="tagline">
+      木々のあいだから差し込むひかりと、<br>
+      ゆっくりとほどけてゆく時間。<br>
+      森のカフェ「こもれび」へようこそ。
+    </p>
+  </div>
+  <div class="scroll-ind">SCROLL</div>
+</header>
+
+<!-- ===== CONCEPT ===== -->
+<section id="concept" class="concept">
+  <div class="section-head">
+    <span class="section-num latin">— 01</span>
+    <div>
+      <div class="section-kicker">Our Concept</div>
+      <h2 class="section-title">森の中の、小さな休息</h2>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept-img">
+      <img src="images/exterior.jpg" alt="森の中のカフェ外観">
+      <span class="cap">a cabin in the forest</span>
+    </div>
+    <div class="concept-text">
+      <h3>
+        木漏れ日が差し込む店内で、<br>
+        <span class="soft">ゆっくりとした時間を。</span>
+      </h3>
+      <p>
+        森の中にひっそりと佇む、静かで落ち着いたカフェ。<br>
+        大きな窓から差し込むやわらかなひかりと、<br>
+        葉のあいだを抜けてくる風の音に耳を澄ませながら、<br>
+        ゆったりとした一杯をお愉しみいただけます。
+      </p>
+      <p>
+        厳選した豆で淹れるコーヒー、<br>
+        季節ごとに変わるハーブティー、<br>
+        そして自家製の焼き菓子たち。<br>
+        忙しい日常から、ひととき離れるための場所。
+      </p>
+      <div class="sign">— 森のカフェ こもれび</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MENU ===== -->
+<section id="menu" class="menu">
+  <div class="section-head">
+    <span class="section-num latin">— 02</span>
+    <div>
+      <div class="section-kicker">Menu</div>
+      <h2 class="section-title">おしながき</h2>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="menu-wrap">
+    <div class="menu-columns">
+      <div class="menu-col">
+        <h4>Drinks <span class="jp">飲みもの</span></h4>
+
+        <div class="menu-item">
+          <div>
+            <div class="name">こもれびブレンドコーヒー</div>
+            <span class="desc">Komorebi House Blend</span>
+          </div>
+          <div class="price"><span class="yen">¥</span>550</div>
+        </div>
+
+        <div class="menu-item">
+          <div>
+            <div class="name">季節のハーブティー</div>
+            <span class="desc">Seasonal Herb Tea</span>
+          </div>
+          <div class="price"><span class="yen">¥</span>600</div>
+        </div>
+
+        <div class="menu-item">
+          <div>
+            <div class="name">カフェラテ</div>
+            <span class="desc">Café Latte</span>
+          </div>
+          <div class="price"><span class="yen">¥</span>650</div>
+        </div>
+      </div>
+
+      <div class="menu-col">
+        <h4>Food <span class="jp">お菓子とごはん</span></h4>
+
+        <div class="menu-item">
+          <div>
+            <div class="name">自家製チーズケーキ</div>
+            <span class="desc">Homemade Cheesecake</span>
+          </div>
+          <div class="price"><span class="yen">¥</span>500</div>
+        </div>
+
+        <div class="menu-item">
+          <div>
+            <div class="name">森のフルーツタルト</div>
+            <span class="desc">Forest Fruit Tart</span>
+          </div>
+          <div class="price"><span class="yen">¥</span>580</div>
+        </div>
+
+        <div class="menu-item">
+          <div>
+            <div class="name">本日のサンドイッチ</div>
+            <span class="desc">Sandwich of the Day</span>
+          </div>
+          <div class="price"><span class="yen">¥</span>780</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-note">表示価格はすべて税込です &nbsp;/&nbsp; all prices include tax</div>
+  </div>
+</section>
+
+<!-- ===== INFO / ACCESS ===== -->
+<section id="info" class="info">
+  <div class="section-head">
+    <span class="section-num latin">— 03</span>
+    <div>
+      <div class="section-kicker">Information &amp; Access</div>
+      <h2 class="section-title">店舗情報・アクセス</h2>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-left">
+      <img src="images/exterior.jpg" alt="カフェ外観">
+      <div class="exterior-cap">— the shop from the garden path</div>
+
+      <div class="info-details">
+        <div class="info-row">
+          <div class="label">住所<span class="en">address</span></div>
+          <div class="value">
+            <strong>〒000-0000</strong>
+            <small>東京都〇〇区1-1-1  森のビル 1F</small>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="label">電話<span class="en">tel</span></div>
+          <div class="value"><strong>03 - XXXX - XXXX</strong></div>
+        </div>
+        <div class="info-row">
+          <div class="label">営業時間<span class="en">hours</span></div>
+          <div class="value">
+            <div class="hours-grid">
+              <div class="d">Mon – Sun</div><div>10:00 – 18:00</div>
+              <div class="d">Wednesday</div><div>定休日 / closed</div>
+            </div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="label">定休日<span class="en">closed</span></div>
+          <div class="value">毎週水曜日</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-right">
+      <div class="map-wrap">
+        <img src="images/map.jpg" alt="森のカフェ こもれび 周辺地図">
+        <div class="map-label">— map</div>
+      </div>
+      <p style="margin-top:24px; font-size:13px; line-height:2; color:var(--ink-soft); letter-spacing:0.08em;">
+        森の小道を歩いて、看板が見えたら到着です。<br>
+        駐車場は店舗前に3台分ございます。<br>
+        最寄り駅からは、徒歩約12分。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="mark">森のカフェ こもれび</div>
+  <div class="mark-en">Komorebi — cafe in the woods</div>
+  <div class="divider"></div>
+  <small>© 2026 KOMOREBI. All quiet hours reserved.</small>
+</footer>
+
+
+
+</body></html>
