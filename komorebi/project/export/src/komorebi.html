@@ -498,6 +498,61 @@
     letter-spacing: 0.2em;
   }
 
+  /* ---------- News ---------- */
+  .news {
+    background: var(--paper);
+  }
+  .news-list {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .news-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .news-item:first-child { border-top: 1px solid var(--rule); }
+  .news-date {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .news-date-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0.3em;
+    color: var(--moss);
+  }
+  .news-tag {
+    display: inline-block;
+    width: fit-content;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    border: 1px solid var(--rule);
+    padding: 3px 12px;
+  }
+  .news-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: 0.1em;
+    line-height: 1.7;
+    margin-bottom: 10px;
+    color: var(--forest-deep);
+  }
+  .news-text {
+    font-size: 14px;
+    line-height: 2;
+    color: rgba(31, 36, 24, 0.6);
+    letter-spacing: 0.04em;
+  }
+
   /* ---------- Footer ---------- */
   footer {
     background: var(--forest-deep);
@@ -553,6 +608,11 @@
     }
     .concept-text h3 { font-size: 22px; }
     .info-row { grid-template-columns: 110px 1fr; gap: 14px; }
+    .news-item {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 28px 0;
+    }
   }
 </style>
 </head>
@@ -567,6 +627,7 @@
   <ul>
     <li><a href="#concept">コンセプト<span class="en">concept</span></a></li>
     <li><a href="#menu">メニュー<span class="en">menu</span></a></li>
+    <li><a href="#news">お知らせ<span class="en">news</span></a></li>
     <li><a href="#info">店舗情報<span class="en">access</span></a></li>
   </ul>
 </nav>
@@ -758,6 +819,51 @@
         最寄り駅からは、徒歩約12分。
       </p>
     </div>
+  </div>
+</section>
+
+<!-- ===== NEWS ===== -->
+<section id="news" class="news">
+  <div class="section-head">
+    <span class="section-num latin">— 04</span>
+    <div>
+      <div class="section-kicker">News</div>
+      <h2 class="section-title">お知らせ</h2>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="news-list">
+    <article class="news-item">
+      <div class="news-date">
+        <span class="news-date-num">2026.04.20</span>
+        <span class="news-tag">お知らせ</span>
+      </div>
+      <div class="news-body">
+        <p class="news-title">ゴールデンウィーク中の営業について</p>
+        <p class="news-text">4月29日〜5月5日は、通常通り営業いたします。混雑が予想されますのでご了承ください。</p>
+      </div>
+    </article>
+    <article class="news-item">
+      <div class="news-date">
+        <span class="news-date-num">2026.04.10</span>
+        <span class="news-tag">新メニュー</span>
+      </div>
+      <div class="news-body">
+        <p class="news-title">春の限定メニュー登場</p>
+        <p class="news-text">春の恵みをいかした、季節限定のハーブティーとタルトをご用意いたしました。ぜひお試しください。</p>
+      </div>
+    </article>
+    <article class="news-item">
+      <div class="news-date">
+        <span class="news-date-num">2026.03.01</span>
+        <span class="news-tag">お知らせ</span>
+      </div>
+      <div class="news-body">
+        <p class="news-title">ウェブサイトをリニューアルしました</p>
+        <p class="news-text">新しいウェブサイトをオープンいたしました。今後ともどうぞよろしくお願いいたします。</p>
+      </div>
+    </article>
   </div>
 </section>
 
